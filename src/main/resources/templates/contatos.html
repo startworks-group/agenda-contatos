@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html 
+xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+  <title>Listagem de contatos utilizando o Spring Boot</title>
+</head>
+ 
+<body>
+  
+  <h1>Lista de contatos</h1>
+  <p>
+  	<a th:href="@{/contatos/cadastro}">cadastrar</a>
+  </p>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Nome</th>
+        <th>E-mail</th>
+        <th>#</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="contato: ${listadecontatos}">  
+        <td th:text="${contato.id}"></td>
+        <td th:text="${contato.nome}"></td>
+        <td th:text="${contato.email}"></td>
+        <td>
+         <a th:href="@{/contatos/{id}(id=${contato.id})}">detalhes</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+</body>
+</html>
