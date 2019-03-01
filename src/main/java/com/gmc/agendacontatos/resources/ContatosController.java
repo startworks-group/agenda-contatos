@@ -25,8 +25,6 @@ public class ContatosController {
 	@Autowired
 	private ContatosRepository contatosRepository;
 	
-	public boolean cadastroPermitido = false;
-	
 	@GetMapping
 	public ModelAndView listar() {
 		List<Contato> lista = contatosRepository.findAll();
@@ -41,8 +39,6 @@ public class ContatosController {
 	public ModelAndView cadastrar(Contato contato) {
 		
 		ModelAndView modelAndView = new ModelAndView("cadastrarContato");
-		
-		cadastroPermitido = true;
 		
 		modelAndView.addObject(contato);
 		return modelAndView;
@@ -70,12 +66,9 @@ public class ContatosController {
 		if(bindingResult.hasErrors()) {
 			return cadastrar(contato);
 		}
-		if(!cadastroPermitido) {
-			return listar();
-		}
+		
 		contatosRepository.save(contato);
-		cadastroPermitido = false;
-		return listar();
+		return new ModelAndView("redirect:/contatos");
 	}
 	
 	@DeleteMapping("/{id}")
