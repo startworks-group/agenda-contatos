@@ -68,6 +68,7 @@ public class ContatosController {
 		}
 		
 		contatosRepository.save(contato);
+		
 		return new ModelAndView("redirect:/contatos");
 	}
 	
